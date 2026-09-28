@@ -7,4 +7,5 @@ export type CreatorShape = {
   sizes: string;
   style: CSSProperties;
   speed: number;
+  mouse: number;
 };

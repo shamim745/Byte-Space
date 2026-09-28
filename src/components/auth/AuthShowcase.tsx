@@ -22,12 +22,23 @@ const AuthShowcase = ({ title, description }: AuthShowcaseProps) => (
       className="absolute inset-0 hidden min-[75rem]:block"
     >
       {showcaseCourses.map((course) => (
-        <div key={course.title} className={`absolute ${course.position}`}>
+        <div
+          key={course.title}
+          className={`absolute will-change-transform ${course.position}`}
+          data-parallax={course.speed}
+          data-mouse={course.mouse}
+        >
           <ShowcaseCourseCard title={course.title} image={course.image} />
         </div>
       ))}
 
-      <StudentsCard className="absolute left-[226px] top-[620px]" />
+      <div
+        className="absolute left-[226px] top-[620px] will-change-transform"
+        data-parallax={70}
+        data-mouse={30}
+      >
+        <StudentsCard />
+      </div>
 
       {showcaseShapes.map((shape) => (
         <Image
@@ -36,7 +47,9 @@ const AuthShowcase = ({ title, description }: AuthShowcaseProps) => (
           alt=""
           width={shape.width}
           height={shape.height}
-          className={`absolute ${shape.position}`}
+          className={`absolute will-change-transform ${shape.position}`}
+          data-parallax={shape.speed}
+          data-mouse={shape.mouse}
         />
       ))}
     </div>

@@ -8,7 +8,7 @@ import { useRef } from "react";
 
 const JoinAsCreator = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  useParallax(sectionRef, { origin: "center" });
+  useParallax(sectionRef, { origin: "center", mouse: true });
 
   return (
     <section
@@ -29,6 +29,7 @@ const JoinAsCreator = () => {
             className="absolute h-auto will-change-transform"
             style={shape.style}
             data-parallax={shape.speed}
+            data-mouse={shape.mouse}
           />
         ))}
       </div>

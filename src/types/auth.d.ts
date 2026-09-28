@@ -14,6 +14,10 @@ export type ShowcaseCourse = {
   title: string;
   image: string;
   position: string;
+  /** px the card lags behind the section as it scrolls */
+  speed: number;
+  /** px the card drifts at full pointer deflection */
+  mouse: number;
 };
 
 export type ShowcaseShape = {
@@ -21,6 +25,8 @@ export type ShowcaseShape = {
   position: string;
   width: number;
   height: number;
+  speed: number;
+  mouse: number;
 };
 
 export type FormFieldProps = InputHTMLAttributes<HTMLInputElement> & {

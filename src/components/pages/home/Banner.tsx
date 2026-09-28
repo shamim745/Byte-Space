@@ -1,36 +1,62 @@
+"use client";
+
 import Image from "next/image";
 import { heroShapes, type HeroShapeKey } from "@/components/brand/shapes";
+import useParallax from "@/hooks/useParallax";
+import { useRef } from "react";
 
 /**
  * Home hero — geometry taken 1:1 from Figma "Hero_Frame" (1:1695), a 1440 x 1024
- * frame. Every number below is expressed in design pixels relative to that frame
- * and multiplied by `--k` (see .hero-art in globals.css) so the artwork stays
+ * frame. Every number is expressed in design pixels relative to that frame and
+ * multiplied by `--u` (see .hero-art in globals.css), so the artwork stays
  * pixel-identical between 1920px and 1024px and scales down below that.
+ *
+ * `scroll` is how far a layer lags behind the section as it scrolls past
+ * (px over the full hero) and `mouse` how far it drifts at full pointer
+ * deflection — deeper layers lag more and move less with the pointer.
  */
 const DESIGN_CENTER = 720;
 
 /** Distance from the bottom of the 1024px design frame. */
 const FRAME_HEIGHT = 1024;
 
-type Shape = { key: HeroShapeKey; x: number; y: number; size: number; rotate?: number };
+type Shape = {
+  key: HeroShapeKey;
+  x: number;
+  y: number;
+  size: number;
+  rotate?: number;
+  scroll: number;
+  mouse: number;
+  /** 'left' / 'right' when the artwork bleeds past the 1440 frame edge, so it
+      stays cropped by the viewport exactly like Figma crops it. */
+  anchor?: "left" | "right";
+};
 
 const shapes: Shape[] = [
-  { key: "topLeftLime", x: -121.6, y: 221, size: 386.8 },
-  { key: "cylinderLime", x: 1227.1, y: 220.2, size: 371.8 },
-  { key: "coneWhite", x: 1104, y: 463.6, size: 188.9 },
-  { key: "spiralSmallWhite", x: 183.8, y: 477, size: 175.8, rotate: 180 },
-  { key: "torusWhite", x: 14.4, y: 681.3, size: 343.7 },
-  { key: "spiralLargeWhite", x: 1123.9, y: 672, size: 331.5 },
+  { key: "topLeftLime", x: -121.6, y: 221, size: 386.8, anchor: "left", scroll: 52, mouse: 14 },
+  { key: "cylinderLime", x: 1227.1, y: 220.2, size: 371.8, anchor: "right", scroll: 52, mouse: 14 },
+  { key: "coneWhite", x: 1104, y: 463.6, size: 188.9, scroll: 44, mouse: 20 },
+  { key: "spiralSmallWhite", x: 183.8, y: 477, size: 175.8, rotate: 180, scroll: 40, mouse: 28 },
+  { key: "torusWhite", x: 14.4, y: 681.3, size: 343.7, scroll: 48, mouse: 24 },
+  { key: "spiralLargeWhite", x: 1123.9, y: 672, size: 331.5, anchor: "right", scroll: 40, mouse: 28 },
 ];
 
-const shapeVars = ({ x, y, size, rotate }: Shape) =>
-  ({
-    "--x": x - DESIGN_CENTER,
+const shapeVars = ({ x, y, size, anchor }: Shape) => {
+  const u = " * var(--u, 1px)";
+  const horizontal =
+    anchor === "left"
+      ? { left: `calc(${x}${u})` }
+      : anchor === "right"
+        ? { right: `calc(${1440 - x - size}${u})` }
+        : { left: `calc(50% + ${x - DESIGN_CENTER}${u})` };
+  return {
+    ...horizontal,
     "--t": y,
     "--b": FRAME_HEIGHT - (y + size),
     "--s": size,
-    ...(rotate ? { "--r": rotate + "deg" } : null),
-  }) as React.CSSProperties;
+  } as unknown as React.CSSProperties;
+};
 
 /** Floating cards — [x, y] in design px from the top-left of the frame. */
 const cardAt = (x: number, y: number) => {
@@ -70,24 +96,42 @@ const StarIcon = () => (
 );
 
 const Banner = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  useParallax(sectionRef, { mouse: true });
+
   return (
-    <section className="hero-art relative isolate overflow-hidden bg-[#003BE2] lg:h-[1024px]">
+    <section
+      ref={sectionRef}
+      className="hero-art relative isolate overflow-hidden bg-[#003BE2] lg:h-[1024px]"
+    >
       <div aria-hidden className="hero-grid pointer-events-none absolute inset-y-0 left-[calc(50%_-_3600px)] w-[7200px]" />
 
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="hero-ring" />
+        <div className="hero-ring" data-parallax={64} data-mouse={6} />
         {shapes.map((shape) => {
           const { src, width, height } = heroShapes[shape.key];
+          const { scroll, mouse } = shape;
           return (
-            <Image
+            <div
               key={shape.key}
-              src={src}
-              alt=""
-              width={width}
-              height={height}
-              className="hero-shape select-none"
+              className="hero-shape"
               style={shapeVars(shape)}
-            />
+              data-parallax={scroll}
+              data-mouse={mouse}
+            >
+              <Image
+                src={src}
+                alt=""
+                width={width}
+                height={height}
+                className="hero-shape-art select-none"
+                style={
+                  shape.rotate
+                    ? ({ "--r": `${shape.rotate}deg` } as React.CSSProperties)
+                    : undefined
+                }
+              />
+            </div>
           );
         })}
       </div>
@@ -133,7 +177,11 @@ const Banner = () => {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-8 aspect-[578/541] w-full max-w-[578px] lg:absolute lg:aspect-auto lg:left-1/2 lg:top-[512px] lg:mt-0 lg:h-[541px] lg:w-[578px] lg:max-w-none lg:-translate-x-[289px]">
+      <div
+        className="relative z-10 mx-auto mt-8 aspect-[578/541] w-full max-w-[578px] will-change-transform lg:absolute lg:aspect-auto lg:left-[calc(50%_-_289px)] lg:top-[512px] lg:mt-0 lg:h-[541px] lg:w-[578px] lg:max-w-none"
+        data-parallax={24}
+        data-mouse={8}
+      >
         <Image
           src="/assets/images/brand/hero-student.png"
           alt="Student exploring ByteSpace courses"
@@ -146,8 +194,10 @@ const Banner = () => {
       </div>
 
       <div
-        className="absolute hidden h-[70px] w-[208px] flex-col justify-center rounded-2xl bg-white p-4 z-10 lg:flex"
+        className="absolute hidden h-[70px] w-[208px] flex-col justify-center rounded-2xl bg-white p-4 z-10 will-change-transform lg:flex"
         style={cardAt(404, 639)}
+        data-parallax={12}
+        data-mouse={14}
       >
         <p className="text-[16px] font-medium leading-[19.2px] text-[#242528]">UI/UX Design</p>
         <div className="flex items-center gap-2 text-[12px] leading-[19.2px] text-[#82868E]">
@@ -158,8 +208,10 @@ const Banner = () => {
       </div>
 
       <div
-        className="absolute hidden h-[131px] w-[232px] flex-col gap-2 rounded-2xl bg-white p-4 z-10 lg:flex"
+        className="absolute hidden h-[131px] w-[232px] flex-col gap-2 rounded-2xl bg-white p-4 z-10 will-change-transform lg:flex"
         style={cardAt(842, 651)}
+        data-parallax={12}
+        data-mouse={14}
       >
         <p className="text-[14px] font-medium leading-[16.8px] text-[#242528]">
           Learning Progress
@@ -173,8 +225,10 @@ const Banner = () => {
       </div>
 
       <div
-        className="absolute hidden h-[121px] w-[258px] flex-col gap-2 rounded-2xl bg-white p-4 z-10 lg:flex"
+        className="absolute hidden h-[121px] w-[258px] flex-col gap-2 rounded-2xl bg-white p-4 z-10 will-change-transform lg:flex"
         style={cardAt(328, 837)}
+        data-parallax={12}
+        data-mouse={14}
       >
         <div>
           <p className="text-[16px] font-medium leading-[19.2px] text-[#242528]">

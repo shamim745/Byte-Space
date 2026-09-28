@@ -108,6 +108,19 @@ The info pages are driven by one dynamic route — `(public)/[info]/page.tsx` re
 - `npm run check:links` link checker (`scripts/check-links.mjs`)
 - This README, plus the repo committed to git for the first time (it had only the Create-Next-App scaffold)
 
+### 7. Rebuilt the home hero against the Figma frame
+- Traced 1:1 from Figma `Hero_Frame` (node `1:1695`, a 1440×1024 frame). At 1440px every box matches: ring `145,582 · 1149×1149 · 320px` stroke, the six 3-D ornaments at their exact image-rect coordinates, photo `431,512 · 578×541`, the three floating cards (`404,639` / `842,651` / `328,837`), the 935px H1 box and the top-aligned search button
+- Fixed everything that didn't match: the blueprint grid was tilted 2° (the frame's lines are exactly axis-aligned), three ornaments had inverted fills (lime ↔ white), the centre scribble was rotated 3° instead of 180°, the header logo sat 6.5px low, "Home" used the wrong line-height, the cards carried a shadow the frame doesn't have, and the search button was vertically centred instead of top-aligned
+- Four ornament assets generated locally in the colours the frame actually uses (`hero-cylinder-lime`, `hero-torus-white`, `hero-spiral-white`, `hero-cone-white`) — Figma's images API was rate-limited, so they were re-rendered through the `HARD_LIGHT` blend the frame itself uses
+- **Responsive system**: every coordinate is a design pixel multiplied by `--u` (`.hero-art`), so the artwork sits on a centred 1440px stage from 1920px down to 1024px and scales below that. Ornaments that bleed past the frame stay pinned to the viewport edge, so they stay cropped exactly as Figma crops them; the grid origin is pinned to the same stage. Below 1024px the ornaments anchor to the bottom, framing the photo instead of sitting behind the headline
+- Audited by measuring the live DOM at 13 widths (1920 → 360): shapes, ring, photo, cards, headline and search all land on their design coordinates; `tsc` + `eslint` clean
+
+### 8. Depth motion — scroll and pointer parallax
+- `hooks/useParallax` gained an opt-in `mouse` flag: the pointer is normalised to −1..1 inside the section and eased at `0.085`/frame, so every layer trails smoothly and settles back to rest when the pointer leaves. The four pre-existing callers are untouched
+- Layers declare `data-parallax` (px of lag across the section's scroll progress) and `data-mouse` (px of drift at full deflection) — deeper layers lag more and move less
+- Applied to the home hero (11 layers: ring, 6 ornaments, photo, 3 cards), the auth shell (grid + 5 showcase decorations) and `JoinAsCreator`. On the hero the wrapper carries the transform while the artwork keeps its own rotation, so the two never collide
+- Gated behind `(pointer: fine)` and `prefers-reduced-motion`
+
 ---
 
 ## Project structure
@@ -144,7 +157,7 @@ scripts/check-links.mjs
 - **Content lives in `src/db`**, never inline in a component — screens stay presentational
 - **One type file per feature**, not per component (`@/types/course`, `@/types/auth`, …)
 - Blue sections share the `design-grid` utility instead of repeating gradients
-- Decorative motion goes through `hooks/useParallax`, which bails out under `prefers-reduced-motion`
+- Decorative motion goes through `hooks/useParallax`, which bails out under `prefers-reduced-motion`; layers opt in with `data-parallax` (scroll lag) and optional `data-mouse` (pointer drift), and only decorative elements get them — never a form or a heading
 - Images always use `next/image` with `sizes` on `fill`; `priority` on LCP images
 - Route data (categories, info pages) is derived from `src/db` so links, sitemap and `generateStaticParams` can never drift apart
 
@@ -166,7 +179,7 @@ scripts/check-links.mjs
 
 - Fonts: only what is used is loaded (Poppins weights + Satoshi variable), all self-hosted by `next/font`
 - Third-party-free: no analytics, no web fonts over the network, no client state libraries
-- Server components by default — only interactive parts (header, forms, tabs, carousel, parallax sections, cursor/reveal) declare `"use client"`: 17 of 53 component files
+- Server components by default — only interactive parts (header, forms, tabs, carousel, parallax sections, cursor/reveal) declare `"use client"`: 19 of 53 component files
 - Every image has `alt` (decorative ones `alt=""`), every icon button has an accessible name
 - Heading order verified per page: H1 → H2 → H3 (sr-only H2s where a grid sits directly under the H1)
 - Reduced-motion respected for parallax and reveals
@@ -188,3 +201,4 @@ scripts/check-links.mjs
 - Category pages accept any slug and show an empty state rather than 404ing, so unprovisioned categories stay clickable
 - Legal/about copy is short placeholder text, not legal advice
 - No automated test suite yet — `check:links` covers routing; unit tests and visual regression would be the next addition
+- The home hero photo is a locally prepared cut-out at `public/assets/images/brand/hero-student.png`. Figma's images API was rate-limited throughout the build, so node `1:1796` could not be pulled — dropping an export over that file swaps the photo with no code change

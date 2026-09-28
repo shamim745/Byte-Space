@@ -8,6 +8,7 @@ export const creatorShapes: CreatorShape[] = [
     sizes: "min(13.056vw, 188px)",
     style: { top: 0, right: "min(11.944vw, 172px)", width: "min(13.056vw, 188px)" },
     speed: 55,
+    mouse: 16,
   },
   {
     src: "/assets/images/brand/cta-lime-spiral.png",
@@ -16,6 +17,7 @@ export const creatorShapes: CreatorShape[] = [
     sizes: "min(22.917vw, 330px)",
     style: { right: 0, bottom: "max(-9.097vw, -131px)", width: "min(22.917vw, 330px)" },
     speed: -70,
+    mouse: 24,
   },
   {
     src: "/assets/images/brand/cta-lime-top-left.png",
@@ -28,6 +30,7 @@ export const creatorShapes: CreatorShape[] = [
       width: "min(26.736vw, 385px)",
     },
     speed: 80,
+    mouse: 14,
   },
   {
     src: "/assets/images/brand/cta-white-spiral.png",
@@ -40,6 +43,7 @@ export const creatorShapes: CreatorShape[] = [
       width: "min(12.153vw, 175px)",
     },
     speed: -45,
+    mouse: 22,
   },
   {
     src: "/assets/images/brand/cta-white-cone.png",
@@ -52,6 +56,7 @@ export const creatorShapes: CreatorShape[] = [
       width: "min(13.056vw, 188px)",
     },
     speed: 45,
+    mouse: 20,
   },
   {
     src: "/assets/images/brand/cta-lime-torus.png",
@@ -64,6 +69,7 @@ export const creatorShapes: CreatorShape[] = [
       width: "min(23.75vw, 342px)",
     },
     speed: -80,
+    mouse: 26,
   },
   {
     src: "/assets/images/brand/cta-white-cylinder.png",
@@ -76,5 +82,6 @@ export const creatorShapes: CreatorShape[] = [
       width: "min(25.694vw, 370px)",
     },
     speed: 65,
+    mouse: 18,
   },
 ];

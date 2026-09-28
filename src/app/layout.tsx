@@ -1,8 +1,8 @@
+import CustomCursor from "@/components/common/CustomCursor";
+import ScrollReveal from "@/components/common/ScrollReveal";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
-import CustomCursor from "@/components/common/CustomCursor";
-import ScrollReveal from "@/components/common/ScrollReveal";
 import "./globals.css";
 
 const poppins = Poppins({

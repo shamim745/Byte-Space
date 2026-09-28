@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local scratch (screenshots, design dumps, logs)
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/*.log
+/*.jsonl
+/tmp-*
+/v-*
+/chk-*
+/cur-*
+/shot-*
+/figma-*.json
+/measure.json
+/outline.txt
+/creator-outline.txt
+/tree.txt
+

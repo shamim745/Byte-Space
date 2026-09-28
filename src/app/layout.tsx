@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${poppins.variable} ${satoshi.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body className="min-h-full bg-white flex flex-col" suppressHydrationWarning>
         <ScrollReveal />
         <CustomCursor />
         {children}

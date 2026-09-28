@@ -72,7 +72,7 @@ const StarIcon = () => (
 const Banner = () => {
   return (
     <section className="hero-art relative isolate overflow-hidden bg-[#003BE2] lg:h-[1024px]">
-      <div aria-hidden className="design-grid pointer-events-none absolute inset-0" />
+      <div aria-hidden className="hero-grid pointer-events-none absolute inset-y-0 left-[calc(50%_-_3600px)] w-[7200px]" />
 
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="hero-ring" />

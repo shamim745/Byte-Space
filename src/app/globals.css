@@ -156,24 +156,42 @@ h6 {
   --u: calc(100vw / 1440);
 }
 
+/* Same 120px design grid, but its origin is pinned to the left edge of the
+   centred 1440px frame (the element is 3x wider than the frame and centred on
+   it, so 1440px stays a whole multiple of the 120px cell) — grid, shapes and
+   photo therefore share one coordinate system at every viewport width. */
+.hero-grid {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      rgb(255 255 255 / 12%) 0 2px,
+      transparent 2px 120px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 12%) 0 2px,
+      transparent 2px 120px
+    );
+}
+
 .hero-shape {
   position: absolute;
-  left: calc(50% + var(--x) * var(--u));
+  left: calc(50% + var(--x) * var(--u, 1px));
   top: auto;
-  bottom: calc(var(--b) * var(--u));
-  width: calc(var(--s) * var(--u));
-  height: calc(var(--s) * var(--u));
+  bottom: calc(var(--b) * var(--u, 1px));
+  width: calc(var(--s) * var(--u, 1px));
+  height: calc(var(--s) * var(--u, 1px));
   transform: rotate(var(--r, 0deg));
 }
 
 .hero-ring {
   position: absolute;
-  left: calc(50% - 575 * var(--u));
+  left: calc(50% - 575 * var(--u, 1px));
   top: auto;
-  bottom: calc(-100 * var(--u));
-  width: calc(1149 * var(--u));
-  height: calc(1149 * var(--u));
-  border: calc(320 * var(--u)) solid #cbfc01;
+  bottom: calc(-100 * var(--u, 1px));
+  width: calc(1149 * var(--u, 1px));
+  height: calc(1149 * var(--u, 1px));
+  border: calc(320 * var(--u, 1px)) solid #cbfc01;
   border-radius: 50%;
 }
 
@@ -185,6 +203,6 @@ h6 {
   .hero-shape,
   .hero-ring {
     bottom: auto;
-    top: calc(var(--t, 582) * var(--u));
+    top: calc(var(--t, 582) * var(--u, 1px));
   }
 }

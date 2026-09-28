@@ -1,0 +1,80 @@
+import type { CreatorShape } from "@/types/creator";
+
+export const creatorShapes: CreatorShape[] = [
+  {
+    src: "/assets/images/brand/cta-lime-cone.png",
+    width: 570,
+    height: 567,
+    sizes: "min(13.056vw, 188px)",
+    style: { top: 0, right: "min(11.944vw, 172px)", width: "min(13.056vw, 188px)" },
+    speed: 55,
+  },
+  {
+    src: "/assets/images/brand/cta-lime-spiral.png",
+    width: 1000,
+    height: 995,
+    sizes: "min(22.917vw, 330px)",
+    style: { right: 0, bottom: "max(-9.097vw, -131px)", width: "min(22.917vw, 330px)" },
+    speed: -70,
+  },
+  {
+    src: "/assets/images/brand/cta-lime-top-left.png",
+    width: 1166,
+    height: 1161,
+    sizes: "min(26.736vw, 385px)",
+    style: {
+      left: "max(-8.194vw, -118px)",
+      top: "max(-11.25vw, -162px)",
+      width: "min(26.736vw, 385px)",
+    },
+    speed: 80,
+  },
+  {
+    src: "/assets/images/brand/cta-white-spiral.png",
+    width: 530,
+    height: 528,
+    sizes: "min(12.153vw, 175px)",
+    style: {
+      left: "min(12.361vw, 178px)",
+      top: "min(0.347vw, 5px)",
+      width: "min(12.153vw, 175px)",
+    },
+    speed: -45,
+  },
+  {
+    src: "/assets/images/brand/cta-white-cone.png",
+    width: 570,
+    height: 567,
+    sizes: "min(13.056vw, 188px)",
+    style: {
+      left: "max(-3.333vw, -48px)",
+      bottom: "min(5.208vw, 75px)",
+      width: "min(13.056vw, 188px)",
+    },
+    speed: 45,
+  },
+  {
+    src: "/assets/images/brand/cta-lime-torus.png",
+    width: 1037,
+    height: 1032,
+    sizes: "min(23.75vw, 342px)",
+    style: {
+      left: "min(1.389vw, 20px)",
+      bottom: "max(-10.625vw, -153px)",
+      width: "min(23.75vw, 342px)",
+    },
+    speed: -80,
+  },
+  {
+    src: "/assets/images/brand/cta-white-cylinder.png",
+    width: 1122,
+    height: 1116,
+    sizes: "min(25.694vw, 370px)",
+    style: {
+      right: "max(-10.833vw, -156px)",
+      top: "min(0.417vw, 6px)",
+      width: "min(25.694vw, 370px)",
+    },
+    speed: 65,
+  },
+];

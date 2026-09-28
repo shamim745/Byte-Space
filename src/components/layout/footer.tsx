@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="mt-auto border-t border-[2px] border-[#CED0D3] bg-white dark:bg-black lg:px-[24px] px-[16px]">
+    <footer className="mt-auto border-t border-[2px] border-[#CED0D3] bg-white lg:px-[24px] px-[16px]">
       <div className="container md:pt-[71px] sm:pt-[50px] pt-[35px] md:pb-[130px] 
       sm:pb-[90px] pb-[50px]">
         <div className="grid gap-y-12 lg:grid-cols-2">
@@ -34,7 +34,7 @@ const Footer = () => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                className="h-12 w-full sm:max-w-[375px] rounded-full border border-black/15 bg-transparent px-6 text-sm text-black placeholder:text-black/50 focus:border-black/40 focus:outline-none dark:border-white/20 dark:text-white dark:placeholder:text-white/50 dark:focus:border-white/40"
+                className="h-12 w-full sm:max-w-[375px] rounded-full border border-black/15 bg-transparent px-6 text-sm text-black placeholder:text-black/50 focus:border-black/40 focus:outline-none"
               />
               <button
                 type="submit"
@@ -46,7 +46,7 @@ const Footer = () => {
               </button>
             </form>
 
-            <p className="mt-6 text-[13px] leading-6 text-black/60 dark:text-white/60">
+            <p className="mt-6 text-[13px] leading-6 text-black/60">
               By subscribing, you agree to our Privacy Policy and consent to
               receive updates from our company.
             </p>
@@ -73,7 +73,7 @@ const Footer = () => {
 
       <div className="container flex flex-col items-center justify-between 
        gap-4 border-t border-black/10 sm:pb-[48px] py-[22px] sm:pt-[22px] sm:flex-row sm:items-center">
-        <p className="text-[13px] text-black/70 dark:text-white/70">
+        <p className="text-[13px] text-black/70">
           @ 2023 ByteSpace. All rights reserved.
         </p>
 
@@ -82,7 +82,7 @@ const Footer = () => {
             <Link
               key={link.label}
               href={link.href}
-              className="text-[13px] text-black/70 transition-colors hover:text-black dark:text-white/70 dark:hover:text-white"
+              className="text-[13px] text-black/70 transition-colors hover:text-black"
             >
               {link.label}
             </Link>

@@ -28,7 +28,7 @@ const ReviewsSection = () => {
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 rounded-[16px] border border-[#DADCDE] p-10 sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-6 rounded-[16px] border border-[#DADCDE] p-6 sm:p-10 sm:flex-row sm:items-center">
         <div className="flex h-[140px] w-[128px] shrink-0 flex-col justify-center gap-2 rounded-[16px] bg-[#D4FB20] text-center">
           <span className="text-[14px] font-medium leading-[16.8px] text-ink">
             {reviews.summaryLabel}
@@ -40,7 +40,7 @@ const ReviewsSection = () => {
 
         <ul className="flex min-w-0 flex-1 flex-col gap-5">
           {reviews.summaryRows.map((row) => (
-            <li key={row.count} className="flex items-center gap-4 sm:gap-10">
+            <li key={row.count} className="flex items-center gap-3 sm:gap-10">
               <span className="h-2 w-[53%] max-w-[260px] shrink overflow-hidden rounded-full bg-[#E5E6E8]">
                 <span
                   className="block h-full rounded-full bg-[#D4FB20]"
@@ -48,7 +48,7 @@ const ReviewsSection = () => {
                 />
               </span>
 
-              <span className="flex shrink-0 gap-2.5">
+              <span className="flex shrink-0 gap-1.5 sm:gap-2.5">
                 {[0, 1, 2, 3, 4].map((star) => (
                   <StarIcon key={star} className="h-[18px] w-[18px] text-ink" />
                 ))}
@@ -92,10 +92,10 @@ const ReviewsSection = () => {
           {items.map((item) => (
             <li
               key={item.name}
-              className="flex flex-col gap-7 rounded-[16px] border border-[#DADCDE] p-10"
+              className="flex flex-col gap-5 rounded-[16px] border border-[#DADCDE] p-6 sm:gap-7 sm:p-10"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex min-w-0 items-center gap-3">
+              <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+                <div className="flex min-w-0 flex-1 items-center gap-3">
                   <Image
                     src={item.avatar}
                     alt={item.name}
@@ -113,12 +113,12 @@ const ReviewsSection = () => {
                   </div>
                 </div>
 
-                <span className="shrink-0 text-[14px] leading-[21px] text-[#4B4C53]">
+                <span className="ml-auto shrink-0 text-[14px] leading-[21px] text-[#4B4C53]">
                   {item.ago}
                 </span>
               </div>
 
-              <div className="flex gap-2.5">
+              <div className="flex gap-1.5 sm:gap-2.5">
                 {Array.from({ length: item.rating }).map((_, star) => (
                   <StarIcon key={star} className="h-[18px] w-[18px] text-ink" />
                 ))}

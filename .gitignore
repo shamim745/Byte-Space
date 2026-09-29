@@ -58,3 +58,7 @@ next-env.d.ts
 /creator-outline.txt
 /tree.txt
 
+# agent docs (regenerated locally)
+AGENTS.md
+CLAUDE.md
+

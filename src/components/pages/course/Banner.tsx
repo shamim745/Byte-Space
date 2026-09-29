@@ -7,7 +7,10 @@ const Banner = () => {
 
   return (
     <section className="relative isolate overflow-hidden bg-[#003BE2]">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 design-grid" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 design-grid"
+      />
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         {bannerShapes.map((shape) => (
@@ -46,7 +49,6 @@ const Banner = () => {
                   return (
                     <li
                       key={item.label}
-                      id={item.icon === "rating" ? "reviews" : undefined}
                       className="flex h-10 scroll-mt-[104px] items-center gap-2 rounded-[24px] bg-white px-4 backdrop-blur-md sm:px-6 xl:scroll-mt-[144px]"
                     >
                       <Icon className="h-[18px] w-[18px] shrink-0 text-[#003BE2]" />

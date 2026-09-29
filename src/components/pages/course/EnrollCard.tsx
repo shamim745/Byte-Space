@@ -8,10 +8,7 @@ const EnrollCard = () => {
   const { curriculum, pitch, price, cta, includes, creator } = courseDetail;
 
   return (
-    <div
-      id="lessons"
-      className="scroll-mt-[104px] rounded-[24px] border border-[#CED0D3] bg-white p-6 sm:p-10 xl:scroll-mt-[144px]"
-    >
+    <div className="rounded-[24px] border border-[#CED0D3] bg-white p-6 sm:p-10">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-6">
           <SectionTitle>{curriculum.heading}</SectionTitle>

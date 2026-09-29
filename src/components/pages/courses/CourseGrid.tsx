@@ -14,7 +14,7 @@ const CourseGrid = ({ courses }: CourseGridProps) => {
 
   return (
     <ul
-      className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid gap-6 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       role="list"
       aria-label="Courses"
     >

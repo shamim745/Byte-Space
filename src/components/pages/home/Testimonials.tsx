@@ -1,15 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { A11y, Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide, type SwiperClass } from "swiper/react";
+import "swiper/css";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import GlowLayer from "@/components/ui/GlowLayer";
 import { testimonialGlows, testimonials } from "@/db/testimonials";
 
-const slideClass =
-  "w-full shrink-0 snap-start sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-82px)/3)]";
+const slides = [...testimonials, ...testimonials];
+const pageCount = testimonials.length;
 
 const arrowClass =
-  "grid h-10 w-10 place-items-center rounded-full border border-black/15 bg-white text-ink transition hover:border-ink disabled:cursor-not-allowed disabled:opacity-40";
+  "grid h-10 w-10 place-items-center rounded-full border border-black/15 bg-white text-ink transition hover:border-ink";
 
 const ChevronIcon = ({ flipped = false }: { flipped?: boolean }) => (
   <svg
@@ -27,57 +30,21 @@ const ChevronIcon = ({ flipped = false }: { flipped?: boolean }) => (
 );
 
 const Testimonials = () => {
-  const trackRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperClass | null>(null);
   const [active, setActive] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(0);
-  const [scrollable, setScrollable] = useState(false);
-
-  const sync = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const slides = Array.from(track.querySelectorAll<HTMLElement>("[data-slide]"));
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    setScrollable(maxScroll > 4);
-
-    if (!slides.length) return;
-
-    let last = 0;
-    slides.forEach((slide, index) => {
-      if (slide.offsetLeft <= maxScroll + 4) last = index;
-    });
-    setMaxIndex(last);
-
-    const nearest = slides.reduce(
-      (best, slide, index) =>
-        Math.abs(slide.offsetLeft - track.scrollLeft) <
-        Math.abs(slides[best].offsetLeft - track.scrollLeft)
-          ? index
-          : best,
-      0,
-    );
-    setActive(nearest);
-  }, []);
 
   useEffect(() => {
-    sync();
-    window.addEventListener("resize", sync);
-    return () => window.removeEventListener("resize", sync);
-  }, [sync]);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      swiperRef.current?.autoplay.stop();
+    }
+  }, []);
 
   const goTo = (index: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const target = Math.min(Math.max(index, 0), maxIndex);
-    const slide = track.querySelectorAll<HTMLElement>("[data-slide]")[target];
-    if (slide) track.scrollTo({ left: slide.offsetLeft, behavior: "smooth" });
+    swiperRef.current?.slideToLoop(index);
   };
 
-  const pages = Array.from({ length: maxIndex + 1 }, (_, index) => index);
-
   return (
-    <section className="relative overflow-hidden bg-[#FAFAFA] px-4 pb-14 pt-16 sm:pb-[57px] sm:pt-[74px] lg:px-6">
+    <section className="relative overflow-hidden bg-[#FAFAFA] px-4 pb-10 pt-10 sm:pb-[57px] sm:pt-[74px] lg:px-6">
       <GlowLayer glows={testimonialGlows} />
 
       <div className="container relative">
@@ -90,41 +57,59 @@ const Testimonials = () => {
           </h2>
 
           <p className="max-w-[580px] text-lg leading-[29px] text-[#4F4F4F]">
-            At ByteSpace, our vibrant community of learners and creators is at the heart of what
-            we do. Hear directly from those who have experienced the transformative journey of
-            learning and creating on our platform. Explore testimonials that reflect the diverse
+            At ByteSpace, our vibrant community of learners and creators is at
+            the heart of what we do. Hear directly from those who have
+            experienced the transformative journey of learning and creating on
+            our platform. Explore testimonials that reflect the diverse
             perspectives of enthusiastic learners and accomplished creators.
           </p>
         </div>
 
         <div
-          ref={trackRef}
-          onScroll={sync}
           data-reveal
           style={{ "--reveal-delay": "0.12s" } as React.CSSProperties}
-          className="no-scrollbar relative mt-10 flex snap-x snap-mandatory items-start gap-6 overflow-x-auto pb-1 lg:mt-[72px] lg:gap-[41px]"
+          className="relative mt-10 lg:mt-[72px]"
         >
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} data-slide className={slideClass}>
-              <TestimonialCard testimonial={testimonial} />
-            </div>
-          ))}
-        </div>
+          <Swiper
+            modules={[A11y, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 41 },
+            }}
+            loop
+            speed={700}
+            grabCursor
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => setActive(swiper.realIndex % pageCount)}
+          >
+            {slides.map((testimonial, index) => (
+              <SwiperSlide key={`${testimonial.id}-${index}`}>
+                <TestimonialCard testimonial={testimonial} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-        {scrollable && (
           <div className="mt-8 flex items-center justify-center gap-4">
             <button
               type="button"
               aria-label="Previous testimonial"
-              onClick={() => goTo(active - 1)}
-              disabled={active <= 0}
+              onClick={() => swiperRef.current?.slidePrev()}
               className={arrowClass}
             >
               <ChevronIcon flipped />
             </button>
 
             <div className="flex items-center gap-2">
-              {pages.map((index) => (
+              {Array.from({ length: pageCount }, (_, index) => (
                 <button
                   key={index}
                   type="button"
@@ -141,14 +126,13 @@ const Testimonials = () => {
             <button
               type="button"
               aria-label="Next testimonial"
-              onClick={() => goTo(active + 1)}
-              disabled={active >= maxIndex}
+              onClick={() => swiperRef.current?.slideNext()}
               className={arrowClass}
             >
               <ChevronIcon />
             </button>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

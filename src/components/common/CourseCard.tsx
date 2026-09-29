@@ -1,3 +1,7 @@
+"use client";
+
+import { ShoppingBagIcon } from "@/components/common/Icons";
+import { useCart } from "@/context/cart";
 import type { CourseCardProps } from "@/types/course";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,11 +42,26 @@ const LevelIcon = () => (
 const TAG = "min-w-0 truncate flex-1 rounded-[24px] bg-[#f6f6f6] px-3 py-1.5 text-center text-xs font-medium leading-[14.4px] text-[#4f4f4f]";
 
 const CourseCard = ({ course }: CourseCardProps) => {
+  const { addItem, items, open } = useCart();
+  const inCart = items.some((item) => item.id === `course-${course.id}`);
+
+  const handleAdd = () => {
+    addItem({
+      id: `course-${course.id}`,
+      title: course.title,
+      image: course.image,
+      price: course.price,
+      author: course.author,
+    });
+    open();
+  };
+
   return (
-    <Link
-      href="/course-details"
-      className="block min-w-0 rounded-[24px] border border-[#ced0d3] bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-    >
+    <div className="group relative min-w-0">
+      <Link
+        href="/course-details"
+        className="block min-w-0 rounded-[24px] border border-[#ced0d3] bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+      >
       <div className="relative aspect-[341/195] overflow-hidden rounded-xl">
         <Image
           src={course.image}
@@ -110,7 +129,24 @@ const CourseCard = ({ course }: CourseCardProps) => {
           </span>
         </div>
       </div>
-    </Link>
+      </Link>
+
+      <button
+        type="button"
+        onClick={handleAdd}
+        aria-label={
+          inCart ? `View cart — ${course.title} added` : `Add ${course.title} to cart`
+        }
+        aria-pressed={inCart}
+        className={`absolute right-6 top-6 z-10 grid h-10 w-10 place-items-center rounded-full shadow-[0_4px_16px_rgba(36,37,40,0.24)] transition duration-300 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 group-hover:-translate-y-1 ${
+          inCart
+            ? "bg-accent text-ink"
+            : "bg-white text-ink hover:bg-accent"
+        }`}
+      >
+        <ShoppingBagIcon className="h-5 w-5" />
+      </button>
+    </div>
   );
 };
 

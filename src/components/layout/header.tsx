@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { CloseIcon, MenuIcon, ShoppingBagIcon } from "@/components/common/Icons";
+import { useCart } from "@/context/cart";
 import { accountLinks, navLinks } from "@/db/header";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import Link from "next/link";
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { count, open: openCart } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -73,10 +75,16 @@ const Header = () => {
           ))}
           <button
             type="button"
-            aria-label="Cart"
-            className="transition-opacity hover:opacity-70"
+            aria-label={count > 0 ? `Cart, ${count} items` : "Cart"}
+            onClick={openCart}
+            className="relative transition-opacity hover:opacity-70"
           >
             <ShoppingBagIcon className="h-6 w-6" />
+            {count > 0 && (
+              <span className="absolute -right-1.5 -top-1.5 grid h-4 min-w-[16px] place-items-center rounded-full bg-accent px-1 text-[10px] font-semibold leading-none text-ink">
+                {count}
+              </span>
+            )}
           </button>
           <button
             type="button"

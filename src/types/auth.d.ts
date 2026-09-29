@@ -31,6 +31,7 @@ export type ShowcaseShape = {
 
 export type FormFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
+  error?: string;
 };
 
 export type SocialLink = {

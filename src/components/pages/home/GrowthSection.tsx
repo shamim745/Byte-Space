@@ -19,7 +19,7 @@ const GrowthSection = () => {
       <div className="relative mx-auto flex w-full max-w-[1258px] flex-col gap-[20px] sm:gap-10 lg:gap-[72px]">
         <div
           data-reveal
-          className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-[63px]"
+          className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-[63px]"
         >
           <div className="flex w-full min-w-0 flex-col gap-6 sm:gap-10 lg:flex-1 lg:max-w-[574px]">
             <h2 className="max-w-[577px] text-[26px] font-semibold leading-[32px]
@@ -64,7 +64,7 @@ const GrowthSection = () => {
         <div
           data-reveal
           style={{ "--reveal-delay": "0.12s" } as React.CSSProperties}
-          className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-[79px]"
+          className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-[79px]"
         >
           <div className="mx-auto lg:order-0 order-1 flex w-full min-w-0 max-w-[541px] items-center lg:mx-0 lg:flex-1">
             <Image

@@ -16,7 +16,7 @@ export default function ScrollReveal() {
           }
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      { threshold: 0.05, rootMargin: "0px 0px 20% 0px" },
     );
 
     const add = (el: Element) => {

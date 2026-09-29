@@ -46,7 +46,7 @@ There is **no backend**: all content (courses, footer links, categories, page co
 | `/` | Home | Hero with search, client logos, skill categories, learning paths, growth stats, join-as-creator CTA, testimonial carousel |
 | `/courses` | Course catalogue | Search box, filter pills, category tabs, responsive card grid, pagination — state is client-side, markup is server-rendered |
 | `/categories` | Category index | Every category as a link |
-| `/categories/[slug]` | Category listing | `generateStaticParams` for all categories; unknown slugs show an empty state with a link back to all courses |
+| `/categories/[slug]` | Category listing | `generateStaticParams` for all categories; unknown slugs render the 404 page |
 | `/course-details` | Course detail | Blue hero + preview player, sticky enrol card, tab navigation, description / sneak peek / key points, curriculum |
 | `/creator` | Creator profile | Creator banner with stats, filter bar and course grid |
 | `/login` | Sign in | Split auth shell: showcase on the left, form on the right |
@@ -198,7 +198,7 @@ scripts/check-links.mjs
 
 - **Auth is UI-only** — the forms don't call an API; `proxy.ts` is ready for a real `authToken` cookie
 - Course/category/info data is sample content in `src/db`; no CMS or database
-- Category pages accept any slug and show an empty state rather than 404ing, so unprovisioned categories stay clickable
+- Category pages 404 on unknown slugs instead of showing an empty state
 - Legal/about copy is short placeholder text, not legal advice
 - No automated test suite yet — `check:links` covers routing; unit tests and visual regression would be the next addition
-- The home hero photo is a locally prepared cut-out at `public/assets/images/brand/hero-student.png`. Figma's images API was rate-limited throughout the build, so node `1:1796` could not be pulled — dropping an export over that file swaps the photo with no code change
+- The home hero photo is a locally prepared cut-out at `public/assets/images/brand/student-laptop.png`. Figma's images API was rate-limited throughout the build, so node `1:1796` could not be pulled — dropping an export over that file swaps the photo with no code change

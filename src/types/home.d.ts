@@ -1,7 +1,3 @@
-import type { CSSProperties } from "react";
-
-import type { BrandShapeKey } from "@/components/brand/shapes";
-
 export type Glow = {
   size: string;
   left: string;
@@ -34,14 +30,11 @@ export type TestimonialCardProps = {
 export type LearningPath = {
   label: string;
   icon: string;
+  href: string;
 };
 
 export type CategoryCardProps = {
   label: string;
   icon: string;
-};
-
-export type HeroShape = {
-  key: BrandShapeKey;
-  style: CSSProperties;
+  href: string;
 };

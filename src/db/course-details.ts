@@ -188,20 +188,28 @@ export const bannerShapes: BannerShape[] = [
     ...brandShapes.whiteSpiral,
     className:
       "left-[-6%] top-[16%] w-[19%] max-w-[332px] min-w-[130px] xl:block hidden",
+    scroll: 52,
+    mouse: 16,
   },
   {
     ...brandShapes.limeTorus,
     className:
       "right-[6%] top-[15%] w-[13%] max-w-[222px] min-w-[96px] lg:block hidden",
+    scroll: 42,
+    mouse: 22,
   },
   {
     ...brandShapes.limeCone,
     className:
       "left-[1%] bottom-[14%] w-[11%] max-w-[188px] min-w-[88px] md:block hidden",
+    scroll: 36,
+    mouse: 26,
   },
   {
     ...brandShapes.whiteCylinder,
     className:
       "right-[-6%] bottom-[5%] w-[21%] max-w-[357px] min-w-[150px] lg:block hidden",
+    scroll: 58,
+    mouse: 14,
   },
 ];

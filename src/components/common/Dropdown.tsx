@@ -145,7 +145,7 @@ const Dropdown = ({
       style={
         portal && pos
           ? { top: pos.top, left: pos.left, maxHeight: pos.maxH, zIndex: 80 }
-          : { top: pos.top, left: pos.left, maxHeight: pos.maxH, zIndex: 80 }
+          : undefined
       }
     >
       {items.map((item) => {

@@ -1,11 +1,29 @@
+"use client";
+
 import { metaIcons } from "@/components/common/CourseIcons";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { useCart } from "@/context/cart";
 import { courseDetail } from "@/db/course-details";
 import Image from "next/image";
 import Link from "next/link";
 
+const ENROLL_ID = "course-details";
+
 const EnrollCard = () => {
   const { curriculum, pitch, price, cta, includes, creator } = courseDetail;
+  const { addItem, items, open } = useCart();
+  const inCart = items.some((item) => item.id === ENROLL_ID);
+
+  const handleEnroll = () => {
+    addItem({
+      id: ENROLL_ID,
+      title: courseDetail.title,
+      image: courseDetail.preview.image,
+      price: Number(price.amount.replace(/[^0-9.]/g, "")) || 0,
+      author: courseDetail.author,
+    });
+    open();
+  };
 
   return (
     <div className="rounded-[24px] border border-[#CED0D3] bg-white p-6 sm:p-10">
@@ -52,9 +70,10 @@ const EnrollCard = () => {
 
           <button
             type="button"
+            onClick={handleEnroll}
             className="flex h-[46px] w-full cursor-pointer items-center justify-center rounded-[24px] bg-[#D4FB20] text-[18px] font-medium leading-[21.6px] text-ink transition-transform duration-300 hover:-translate-y-0.5"
           >
-            {cta}
+            {inCart ? "In Cart — View Cart" : cta}
           </button>
         </div>
 

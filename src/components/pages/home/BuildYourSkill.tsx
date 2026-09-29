@@ -67,7 +67,7 @@ const BuildYourSkill = () => {
           <div
             data-reveal
             style={{ "--reveal-delay": "0.18s" } as React.CSSProperties}
-            className="md:mt-[72px] sm:mt-[45px] mt-[30px] grid md:gap-[35px] sm:gap-[25px] gap-[20px] text-left sm:grid-cols-2 lg:grid-cols-3"
+            className="md:mt-[72px] sm:mt-[45px] mt-5 grid md:gap-[35px] sm:gap-[25px] gap-4 text-left sm:grid-cols-2 lg:grid-cols-3"
           >
             {visibleCourses.map((item) => (
               <CourseCard key={item.id} course={item} />

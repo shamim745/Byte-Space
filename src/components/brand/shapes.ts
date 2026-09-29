@@ -27,8 +27,6 @@ export const brandShapes = {
   whiteSpiral: { src: ctaWhiteSpiral, width: 530, height: 528 },
 } as const satisfies Record<string, BrandShape>;
 
-export type BrandShapeKey = keyof typeof brandShapes;
-
 export const heroShapes = {
   topLeftLime: { src: ctaLimeTopLeft, width: 1166, height: 1161 },
   cylinderLime: { src: heroCylinderLime, width: 1122, height: 1116 },

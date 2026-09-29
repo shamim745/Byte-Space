@@ -24,7 +24,7 @@ const LearningPaths = () => {
           className="md:mt-[68px] sm:mt-[40px] mt-[25px] grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-6"
         >
           {learningPaths.map((path) => (
-            <CategoryCard key={path.label} label={path.label} icon={path.icon} />
+            <CategoryCard key={path.label} label={path.label} icon={path.icon} href={path.href} />
           ))}
         </div>
       </div>

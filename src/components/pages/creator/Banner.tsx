@@ -32,7 +32,7 @@ const Banner = () => {
       >
         <div
           data-reveal
-          className="container px-4 pt-[120px] pb-[56px] sm:pt-[152px] lg:pt-[172px] lg:pb-[82px] xl:px-0"
+          className="container px-4 pt-[88px] pb-10 sm:pt-[152px] lg:pt-[172px] lg:pb-[82px] xl:px-0"
         >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-6">
           <Image

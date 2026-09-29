@@ -1,5 +1,8 @@
 import CustomCursor from "@/components/common/CustomCursor";
 import ScrollReveal from "@/components/common/ScrollReveal";
+import CartDrawer from "@/components/layout/CartDrawer";
+import OrderSuccessModal from "@/components/layout/OrderSuccessModal";
+import { CartProvider } from "@/context/cart";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
@@ -34,9 +37,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full bg-white flex flex-col" suppressHydrationWarning>
-        <ScrollReveal />
-        <CustomCursor />
-        {children}
+        <CartProvider>
+          <ScrollReveal />
+          <CustomCursor />
+          {children}
+          <CartDrawer />
+          <OrderSuccessModal />
+        </CartProvider>
       </body>
     </html>
   );

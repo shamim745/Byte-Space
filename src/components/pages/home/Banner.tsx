@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { heroShapes, type HeroShapeKey } from "@/components/brand/shapes";
 import useParallax from "@/hooks/useParallax";
+import Image from "next/image";
 import { useRef } from "react";
 
 /**
@@ -136,7 +136,7 @@ const Banner = () => {
         })}
       </div>
 
-      <div className="relative z-10 px-4 pt-[100px] sm:px-6 lg:pt-[169px]">
+      <div className="relative z-10 px-4 pt-20 sm:px-6 lg:pt-[169px]">
         <div className="container">
           <div className="flex flex-col items-center text-center">
             <div className="flex flex-col items-center gap-6 lg:gap-8">
@@ -183,7 +183,7 @@ const Banner = () => {
         data-mouse={8}
       >
         <Image
-          src="/assets/images/brand/hero-student.png"
+          src="/assets/images/brand/student-laptop.png"
           alt="Student exploring ByteSpace courses"
           fill
           sizes="(max-width: 1023px) 100vw, 578px"

@@ -113,6 +113,10 @@ export type CourseDetail = {
 
 export type BannerShape = BrandShape & {
   className: string;
+  /** px the shape travels over the banner's scroll progress */
+  scroll: number;
+  /** px the shape drifts at full pointer deflection */
+  mouse: number;
 };
 
 export type CourseCardProps = {
@@ -147,6 +151,18 @@ export type FilterIconKey = "filter" | "level" | "category";
 export type FilterItem = {
   label: string;
   icon: FilterIconKey;
+};
+
+export type FilterValues = {
+  featured: string;
+  level: string;
+  category: string;
+  sort: string;
+};
+
+export type FilterBarProps = {
+  values: FilterValues;
+  onChange: (patch: Partial<FilterValues>) => void;
 };
 
 export type PaginationProps = {

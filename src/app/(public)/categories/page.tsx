@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const CategoriesPage = () => (
   <>
-    <section className="relative isolate overflow-hidden bg-[#003BE2] px-4 pb-14 pt-[104px] sm:px-6 sm:pt-[132px] lg:pt-[172px]">
+    <section className="relative isolate overflow-hidden bg-[#003BE2] px-4 pb-10 pt-20 sm:px-6 sm:pb-14 sm:pt-[132px] lg:pt-[172px]">
       <div aria-hidden className="design-grid pointer-events-none absolute inset-0" />
 
       <div className="container relative">
@@ -24,7 +24,7 @@ const CategoriesPage = () => (
       </div>
     </section>
 
-    <section className="px-4 pb-[72px] pt-12 sm:px-6">
+    <section className="px-4 pb-10 pt-10 sm:px-6 sm:pb-[72px] sm:pt-12">
       <ul className="container flex flex-wrap gap-3 sm:gap-4">
         {categories.map((category) => (
           <li key={category}>

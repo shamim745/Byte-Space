@@ -37,6 +37,49 @@ export type CourseLesson = {
   duration: string;
 };
 
+export type CourseModule = {
+  title: string;
+  description: string;
+};
+
+export type CourseRatingRow = {
+  percent: number;
+  count: number;
+};
+
+export type CourseReview = {
+  name: string;
+  role: string;
+  avatar: string;
+  ago: string;
+  rating: number;
+  text: string;
+};
+
+export type CourseLessonsContent = {
+  introHeading: string;
+  introText: string;
+  listHeading: string;
+  modules: CourseModule[];
+  contentHeading: string;
+  contentText: string;
+  progressHeading: string;
+  progressText: string;
+  progressLabel: string;
+  progressValue: number;
+};
+
+export type CourseReviewsContent = {
+  heading: string;
+  text: string;
+  summaryLabel: string;
+  summaryScore: string;
+  summaryRows: CourseRatingRow[];
+  listHeading: string;
+  filters: string[];
+  items: CourseReview[];
+};
+
 export type CourseDetail = {
   title: string;
   subtitle: string;
@@ -48,6 +91,8 @@ export type CourseDetail = {
   description: string;
   sneakPeaks: { image: string; alt: string }[];
   keyPoints: string[];
+  lessons: CourseLessonsContent;
+  reviews: CourseReviewsContent;
   curriculum: {
     heading: string;
     lessons: CourseLesson[];
@@ -88,6 +133,8 @@ export type CoursesPageProps = {
 
 export type CourseTabsProps = {
   tabs: { label: string; target: string }[];
+  active: string;
+  onChange: (target: string) => void;
 };
 
 export type CategoryTabsProps = {

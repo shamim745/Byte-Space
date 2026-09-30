@@ -1,19 +1,19 @@
 "use client";
 
+import Dropdown, { DEFAULT_PILL } from "@/components/common/Dropdown";
 import {
   CategoryIcon,
   FilterIcon,
   LevelIcon,
   SortIcon,
 } from "@/components/common/Icons";
-import Dropdown, { DEFAULT_PILL } from "@/components/common/Dropdown";
-import { FEATURED } from "@/db/courses";
 import { categories } from "@/db/categories";
+import { FEATURED } from "@/db/courses";
 import { filters } from "@/db/filter-bar";
-import { useState } from "react";
-import type { FilterBarProps, FilterIconKey } from "@/types/course";
 import type { DropdownItem } from "@/types/common";
+import type { FilterBarProps, FilterIconKey } from "@/types/course";
 import type { ReactNode } from "react";
+import { useState } from "react";
 
 const filterIcons: Record<FilterIconKey, ReactNode> = {
   filter: <FilterIcon className="h-6 w-6 text-ink" />,
@@ -96,7 +96,7 @@ const FilterBar = ({ values, onChange }: FilterBarProps): ReactNode => {
         {rowTopOpen && (
           <div
             aria-hidden
-            className="col-span-2 lg:hidden"
+            className="col-span-2 hidden"
             style={{ height: PUSH_HEIGHT }}
           />
         )}
@@ -130,7 +130,7 @@ const FilterBar = ({ values, onChange }: FilterBarProps): ReactNode => {
       {rowBottomOpen && (
         <div
           aria-hidden
-          className="lg:hidden"
+          className="hidden"
           style={{ height: PUSH_HEIGHT }}
         />
       )}

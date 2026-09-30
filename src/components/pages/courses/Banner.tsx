@@ -1,9 +1,9 @@
 "use client";
 
-import { ChevronDownIcon, SearchIcon } from "@/components/common/Icons";
 import Dropdown from "@/components/common/Dropdown";
-import useParallax from "@/hooks/useParallax";
+import { ChevronDownIcon, SearchIcon } from "@/components/common/Icons";
 import { courses } from "@/db/courses";
+import useParallax from "@/hooks/useParallax";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
@@ -19,7 +19,7 @@ const COURSE_ITEMS = courses.map((course) => ({
 }));
 
 const COURSES_PILL =
-  "flex h-12 items-center justify-center gap-2 rounded-[24px] bg-accent px-6 py-3 text-[18px] font-medium leading-[21.6px] text-ink transition-opacity hover:opacity-90";
+  "flex h-12 items-center lg:w-auto w-full justify-center gap-2 rounded-[24px] bg-accent px-6 py-3 text-[18px] font-medium leading-[21.6px] text-ink transition-opacity hover:opacity-90";
 
 const Banner = ({ search, onSearchChange }: BannerProps) => {
   const sectionRef = useRef<HTMLElement>(null);

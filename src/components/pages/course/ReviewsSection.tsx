@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
 import { metaIcons } from "@/components/common/CourseIcons";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { courseDetail } from "@/db/course-details";
+import Image from "next/image";
+import { useState } from "react";
 
 const ReviewsSection = () => {
   const { reviews } = courseDetail;
@@ -38,23 +38,23 @@ const ReviewsSection = () => {
           </span>
         </div>
 
-        <ul className="flex min-w-0 flex-1 flex-col gap-5">
+        <ul className="flex min-w-0 flex-1 flex-col gap-1">
           {reviews.summaryRows.map((row) => (
             <li key={row.count} className="flex items-center gap-3 sm:gap-10">
-              <span className="h-2 w-[53%] max-w-[260px] shrink overflow-hidden rounded-full bg-[#E5E6E8]">
+              <span className="h-2 w-full shrink overflow-hidden rounded-full bg-[#E5E6E8]">
                 <span
                   className="block h-full rounded-full bg-[#D4FB20]"
                   style={{ width: `${row.percent}%` }}
                 />
               </span>
 
-              <span className="flex shrink-0 gap-1.5 sm:gap-2.5">
+              <span className="flex max-w-[120px] w-full shrink-0 gap-1.5 sm:gap-2.5">
                 {[0, 1, 2, 3, 4].map((star) => (
                   <StarIcon key={star} className="h-[18px] w-[18px] text-ink" />
                 ))}
               </span>
 
-              <span className="ml-auto shrink-0 text-right text-[16px] leading-[25.6px] text-[#4B4C53]">
+              <span className="ml-auto max-w-[50px] w-full shrink-0 text-right text-[16px] leading-[25.6px] text-[#4B4C53]">
                 {row.count}
               </span>
             </li>

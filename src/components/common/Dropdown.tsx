@@ -11,7 +11,7 @@ import {
 import { createPortal } from "react-dom";
 
 export const DEFAULT_PILL =
-  "flex h-12 items-center gap-1 rounded-[24px] border border-[#ced0d3] bg-white px-4 py-3 text-base font-medium leading-[19.2px] text-[#4b4c53] transition-colors hover:border-[#4b4c53]";
+  "flex h-12 items-center gap-[6px] rounded-[24px] border border-[#ced0d3] bg-white px-4 py-3 text-base font-medium leading-[19.2px] text-[#4b4c53] transition-colors hover:border-[#4b4c53]";
 
 const MENU_BASE =
   "z-40 w-max rounded-2xl border border-[#e5e6e8] bg-white p-2 shadow-[0_12px_40px_rgba(36,37,40,0.16)] overflow-y-auto overscroll-contain";

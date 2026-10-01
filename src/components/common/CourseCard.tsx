@@ -19,7 +19,7 @@ const StarIcon = () => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
-    className="h-4 w-4"
+    className="lg:h-[18px] lg:w-[18px] h-[16px] w-[16px]"
     fill="currentColor"
   >
     <path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.5 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5-4.8-4.5 6.6-.9z" />
@@ -30,7 +30,7 @@ const LevelIcon = () => (
   <svg
     viewBox="0 0 16 16"
     aria-hidden="true"
-    className="h-5 w-5"
+    className="h-[13px] w-[15px]"
     fill="currentColor"
   >
     <rect x="1" y="9" width="3" height="6" rx="1" />
@@ -83,9 +83,9 @@ const CourseCard = ({ course }: CourseCardProps) => {
           <h3 className="min-w-0 truncate font-display text-xl font-semibold leading-6 text-black">
             {course.title}
           </h3>
-          <span className="flex shrink-0 items-center gap-0 text-[18px] leading-[28.8px] text-[#4f4f4f]">
+          <span className="flex shrink-0 items-center gap-0 text-[17px] leading-[28.8px] text-[#4f4f4f]">
             {course.rating}
-            <span className="text-[#ced0d3]">
+            <span className="text-[#ced0d3] w-[20px] h-[20px] flex items-center justify-center">
               <StarIcon />
             </span>
           </span>

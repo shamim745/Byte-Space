@@ -16,9 +16,9 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 
 const filterIcons: Record<FilterIconKey, ReactNode> = {
-  filter: <FilterIcon className="h-6 w-6 text-ink" />,
-  level: <LevelIcon className="h-6 w-6 text-ink" />,
-  category: <CategoryIcon className="h-6 w-6 text-ink" />,
+  filter: <FilterIcon className="h-[16px] w-[15px] text-ink" />,
+  level: <LevelIcon className="h-[16px] w-[15px] text-ink" />,
+  category: <CategoryIcon className="h-5 w-[19px] text-ink" />,
 };
 
 const [featuredFilter, levelFilter, categoryFilter] = filters;

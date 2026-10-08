@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import CustomCursor from "@/components/common/CustomCursor";
 import ScrollReveal from "@/components/common/ScrollReveal";
 import CartDrawer from "@/components/layout/CartDrawer";
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <CartDrawer />
           <OrderSuccessModal />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
